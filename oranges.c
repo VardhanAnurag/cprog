@@ -9,7 +9,7 @@ void init()
     for (int i=0; i<IMAX; i++)
         for (int j=0; j<JMAX; j++)
             oranges[i][j] = 1;
-	oranges[7][7] = 2;
+    oranges[7][7] = 2;
 }
 
 void dump()
