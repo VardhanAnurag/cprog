@@ -46,14 +46,10 @@ void infect()
         for (int j=0; j<JMAX; j++)
             if (oranges[i][j] == 2)
             {
-                if ((inrange(i, (j-1))) && (oranges[i][(j-1)] == 1))
-                    oranges[i][(j-1)] = 3;
-                if ((inrange(i, (j+1))) && (oranges[i][(j+1)] == 1))
-                    oranges[i][(j+1)] = 3;
-                if ((inrange((i-1), j)) && (oranges[(i-1)][(j)] == 1))
-                    oranges[(i-1)][j] = 3;
-                if ((inrange((i+1), j)) && (oranges[(i+1)][(j)] == 1))
-                    oranges[(i+1)][j] = 3;
+                if ((inrange(i, (j-1))) && (oranges[i][(j-1)] == 1)) oranges[i][(j-1)] = 3;
+                if ((inrange(i, (j+1))) && (oranges[i][(j+1)] == 1)) oranges[i][(j+1)] = 3;
+                if ((inrange((i-1), j)) && (oranges[(i-1)][j] == 1)) oranges[(i-1)][j] = 3;
+                if ((inrange((i+1), j)) && (oranges[(i+1)][j] == 1)) oranges[(i+1)][j] = 3;
             }
 }
 
