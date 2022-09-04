@@ -159,7 +159,6 @@ int checkForWinner(char grid[], int dim)
                 return 2;
     }
     
-    // X check
     char v = getEntryAtRC(grid, dim, 0, 0);
     if (v != '?')
     {
@@ -174,7 +173,7 @@ int checkForWinner(char grid[], int dim)
                 return 2;
     }
     
-    // X (other) check
+    // X right-top to left-bottom check
     v = getEntryAtRC(grid, dim, 0, (dim-1));
     if (v != '?')
     {
@@ -194,7 +193,101 @@ int checkForWinner(char grid[], int dim)
 
 bool checkForDraw(char grid[], int dim)
 {
-    return false;
+    // Row check
+    for (int r = 0; r < dim; r++)
+    {
+        int sc = 0;
+        int c = 0;
+        char sv = '?';
+        char v = getEntryAtRC(grid, dim, r, sc);
+        while ((sc < dim) && (v == '?'))
+        {
+            sc++;
+            v = getEntryAtRC(grid, dim, r, sc);
+        }
+        if (sc == dim)
+            return false;
+        sv = v;
+        for (c = sc; c < dim; c++)
+        {
+            v = getEntryAtRC(grid, dim, r, c);
+            if ((v != '?') && (v != sv))
+                break;
+        }
+        if (c == dim)
+            return false;
+    }
+
+    // Col check
+    for (int c = 0; c < dim; c++)
+    {
+        int sr = 0;
+        int r = 0;
+        char sv = '?';
+        char v = getEntryAtRC(grid, dim, sr, c);
+        while ((sr < dim) && (v == '?'))
+        {
+            sr++;
+            v = getEntryAtRC(grid, dim, sr, c);
+        }
+        if (sr == dim)
+            return false;
+        sv = v;
+        for (r = sr; r < dim; r++)
+        {
+            v = getEntryAtRC(grid, dim, r, c);
+            if ((v != '?') && (v != sv))
+                break;
+        }
+        if (r == dim)
+            return false;
+    }
+
+    // X left-top to right-bottom check
+    int sr = 0; int sc = 0;
+    int r = 0; int c = 0;
+    char sv = '?';
+    char v = getEntryAtRC(grid, dim, sr, sc);
+    while ((sr < dim) && (v == '?'))
+    {
+        sr++; sc++;
+        v = getEntryAtRC(grid, dim, sr, sc);
+    }
+    if (sr == dim)
+        return false;
+    sv = v;
+    for (r = sr; r < dim; r++, c++)
+    {
+        v = getEntryAtRC(grid, dim, r, c);
+        if ((v != '?') && (v != sv))
+            break;
+    }
+    if (r == dim)
+        return false;
+
+    // X Right-top to left-bottom check
+    sr = 0; sc = dim - 1;
+    r = 0; c = dim - 1;
+    sv = '?';
+    v = getEntryAtRC(grid, dim, sr, sc);
+    while ((sr < dim) && (v == '?'))
+    {
+        sr++; sc--;
+        v = getEntryAtRC(grid, dim, sr, sc);
+    }
+    if (sr == dim)
+        return false;
+    sv = v;
+    for (r = sr; r < dim; r++, c--)
+    {
+        v = getEntryAtRC(grid, dim, r, c);
+        if ((v != '?') && (v != sv))
+            break;
+    }
+    if (r == dim)
+        return false;
+    
+    return true;
 }
 
 /**********************************************************
