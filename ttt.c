@@ -281,12 +281,21 @@ int main()
         //**********************************************************
         int winner = checkForWinner(tttdata, dim);
         if (winner == 1)
+        {
             cout << xwins_msg << endl; 
+            break;
+        }
         else if (winner == 2)
-            cout << owins_msg << endl; 
+        {
+            cout << owins_msg << endl;
+            break;
+        }
         else if (checkForDraw(tttdata, dim))
+        {
             cout << draw_msg << endl; 
-
+            break;
+        }
+        
         turn = 1 - turn;
     } // end while
     
